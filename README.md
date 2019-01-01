@@ -1,4 +1,4 @@
-********"N Queens Problem"*************
+***********************"N Queens Problem"*************
 
 Start playing the N queens and find the solution
 
