@@ -1,0 +1,492 @@
+
+<!-- saved from url=(0055)file:///C:/Users/SONY/Downloads/files/files/resume.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="./resume_files/jquery.min.js.download"></script>
+   <script type="text/javascript" src="./resume_files/jquery.min.js(1).download"></script>
+	<script type="text/javascript" src="./resume_files/jquery.jqplot.js.download"></script>
+	<script type="text/javascript" src="./resume_files/jqplot.pieRenderer.js.download"></script>
+	<script type="text/javascript" src="./resume_files/jqplot.pointLabels.js.download"></script>
+	<link rel="stylesheet" type="text/css" href="./resume_files/jquery.jqplot.css">
+	<link href="./resume_files/css" rel="stylesheet">
+<script>
+
+		$(document).ready(function(){
+		
+
+
+ var data = [
+    ['Application Security', 5],['Infra Security', 3], ['System Admin', 4],['Code Analysis',1]
+  ];
+  var plot1 = jQuery.jqplot ('chart-1', [data], 
+    { 
+	seriesColors:['#4f085a','#025444', '#022b4c','#ab1464'],
+      seriesDefaults: {
+        // Make this a pie chart.
+        renderer: jQuery.jqplot.PieRenderer, 
+        rendererOptions: {
+          // Put data labels on the pie slices.
+          // By default, labels show the percentage of the slice.
+           showDataLabels: true,
+          dataLabels: 'label',
+		  shadow:false
+        }
+      },
+	  
+		grid:{
+				drawBorder: false,
+				background:'#ffffff',
+				shadow:false
+			},	  
+      legend: { show:false}
+    }
+  );
+
+});
+
+setTimeout(function(){ 
+$('.skills').append('<div class="vatools tools"></div>');
+drawbar('vatools',5,['#001D50','#002D7C','#0041B4','#0055EB','#4F8FFF']);
+$('.vatools').append('<div class="title"><span>Security Tools</span></div><div class="sub-title"><div>-IBM APPScan, Burp Suite, Qualys</div></div>');
+
+/*$('.skills').append('<div class="Antivirus tools"><span>4</span></div>');
+drawbar('Antivirus',5,['#396200','#497E00','#63AB00','#7CD700','#93FF00']);
+$('.Antivirus').append('<div class="title"><span>Antivirus Tools</span></div><div class="sub-title"><div>-Symantec, Trend Micro Antivirus</div></div>');*/
+
+$('.skills').append('<div class="OS tools"></div>');
+drawbar('OS',3,['#74003D','#A10055','#D80072','#FF008A','#FF85C6']);
+$('.OS').append('<div class="title"><span>OS</span></div><div class="sub-title"><div>-RHEL,Windows 2003, Windows 2008</div></div>');
+
+$('.skills').append('<div class="WebServers tools"></div>');
+drawbar('WebServers',3,['#665900','#867500','#AA9400','#D2B700','#FFDE00']);
+$('.WebServers').append('<div class="title"><span>Web Servers</span></div><div class="sub-title"><div>-IIS , Apache Tomcat</div></div>');
+
+$('.skills').append('<div class="PolicyCompliance  tools"></div>');
+drawbar('PolicyCompliance',4,['#540062','#7F0094','#AC00C8','#DB00FF','#E965FF']);
+$('.PolicyCompliance').append('<div class="title"><span>Policy Compliance </span></div><div class="sub-title"><div>-Symantec ESM Manager</div></div>');
+
+$('.skills').append('<div class="ComplianceStandards tools"></div>');
+drawbar('ComplianceStandards',5,['#006560','#008B84','#00A79F','#00DBCE','#00FFF8']);
+$('.ComplianceStandards').append('<div class="title"><span>Compliance Standards</span></div><div class="sub-title"><div>-ISO 27001</div></div>');
+
+/*$('.skills').append('<div class="LogManagement tools"><span>3</span></div>');
+drawbar('LogManagement',5,['#9B2900','#B40000','#CA3A06','#E94A11','#FF0000']);
+$('.LogManagement').append('<div class="title"><span>Log Management</span></div><div class="sub-title"><div>-LogLogic, Kiwi Syslog tools</div></div>');
+
+$('.skills').append('<div class="SoftwareUpdate tools"><span>3</span></div>');
+drawbar('SoftwareUpdate',5,['#006560','#008B84','#00A79F','#00DBCE','#00FFF8']);
+$('.SoftwareUpdate').append('<div class="title"><span>Software Update Tools</span></div><div class="sub-title"><div>-WSUS 3.0</div></div>');*/
+
+$('.skills').append('<div class="Scripting tools"></div>');
+drawbar('Scripting',3,['#396200','#497E00','#63AB00','#7CD700','#93FF00']);
+$('.Scripting').append('<div class="title"><span>Scripting</span></div><div class="sub-title"><div>-PowerShell,Python</div></div>');
+
+function drawbar(classname,count,arr){
+for(var i=0;i<count;i++){
+$('.'+classname).append("<div style="+"background-color:"+arr[i]+";width:40px;height:15px;display:inline-block"+"></div>");
+}
+}
+
+}, 3000);
+</script>
+
+<style type="text/css">
+
+body{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+	font-family: 'Open Sans', sans-serif;
+	line-height:25px;
+}
+
+.header{
+    width: 100%;
+}
+
+.image{
+    width: 15%;
+    height: 10%;
+    display: inline-block;
+}
+
+
+.image img{
+    width: 100%;
+    height: 100%;
+}
+
+.self{
+    width: 80%;
+    display: inline-block;
+    position: absolute;
+    top: 3%;
+    left: 20%;
+}
+
+.name div:first-child{
+    display: inline-block;
+    font-size: 28px;
+	font-weight:600;
+}
+
+.name span{
+    font-size: 14px;
+}
+
+.contact span{
+font-size:12px;
+padding-right:10px;
+border-right:1px solid black;
+}
+
+.designation span{
+font-size:14px;
+padding-right:10px;
+border-right:1px solid black;
+font-weight:bold;
+}
+
+
+
+.work_experience{
+color:#727272;
+font-size:12px;
+padding: 0% 0% 6% 0%;
+}
+
+.employment{
+    width: 50%;
+    /* font-size: 10px; */
+    margin-top: 2%;
+    display: inline-block;
+}
+
+.skills{
+    display:block;
+    width: 100%;
+}
+.block2{
+display: inline-block;
+    position: absolute;
+    top: 11.5%;
+    /* height: auto; */
+    width: 40%;
+	right:5%;
+}
+.main{
+    height: 50%;
+}
+
+.title{
+display:inline;	
+float:right;
+}
+
+.title span{
+text-align:left;
+font-size: 14px;
+    font-weight: bold;
+}
+
+.Photoshop,.webDesign,.HTML{
+    padding: 0% 0% 9% 0%;
+}
+.Photoshop span,.webDesign span,.HTML span{
+ padding-right: 5%;
+}
+
+.qualification span{
+padding-right:10px;
+border-right:1px solid black;
+font-weight:bold;
+font-size:14px;
+}
+
+.contact span:last-child,.designation span:last-child,.qualification span:last-child{
+
+border-right:none;
+}
+.place{
+padding: 1% 0% 2% 0%;
+font-size:12px;
+}
+
+.educationandcert{
+width: 55%;
+    display: inline-block;
+}
+
+.education{
+margin-top:10%;
+}
+.experience{
+width: 45%;
+   display:block;
+   position:relative;
+  /* top:55%;*/
+
+}
+
+.experience h1{
+padding-left:14%;
+}
+
+#chart-1{
+height:350px !important;
+    margin-left: -25%;
+}
+.sub-title{
+font-size:12px;
+width:100%;
+float:right;
+}
+
+.sub-title div{
+float:right;
+}
+
+.experience h2{
+margin-left:1%;
+}
+
+<!-- .certs div img {
+    width: 60px;
+}
+
+.certs{
+    display: inline-block; 
+    position: absolute;
+    left: 87%;
+    top: 6%;
+} -->
+.work_experience div {
+    padding-top: 2%;
+}
+
+
+.cert1 div,.cert2 div,.cert3 div{
+display:inline-block;
+font-size:14px;
+vertical-align:middle;
+font-weight:bold;
+}
+
+.cert1,.cert2,.cert3{
+margin-top:3%;
+}
+
+.cert1 table,.cert2 table{
+font-size:12px;
+margin-left: -0.5%;
+}
+
+.cert1_img img,.cert2_img img,.cert3_img img{
+ width: 90px;
+}
+.name{
+width:60%;
+}
+
+table td:first-child {   
+    width: 30%;
+}
+
+.tools{
+height:60px;
+}
+.vatools.tools {
+    padding-top: 3%;
+}
+.jqplot-data-label{
+font-size:12px;
+    color: #e5dbdb;
+    padding-top: 1%;	
+}
+
+</style>
+
+</head>
+<body>
+<div class="header">
+  <div class="image"><img src="file:///C:/Users/SONY/Downloads/files/files/devi.jpg"></div>
+<div class="self">
+<div class="name">
+<div>Devi Prasad Nekkanti</div>
+<span>Security Professional</span></div>
+<!-- <div class="certs">
+  <div class="cert1"><img src="cert1.png"></div>
+  <div class="cert2"><img src="cert2.jpg"></div>
+  <div class="cert3"><img src="cert3.gif"></div>
+
+</div> -->
+<div class="contact">
+  <span>www.linkedin.com/in/deviprasadn</span>
+ <span>+91-8297241212</span>
+ <span>deviprasad.n@outlook.com</span>
+</div></div>
+
+</div>
+<div class="main">
+
+  <div class="employment">
+    <div class="employment1">
+  <h2>Employment</h2>
+      <div class="designation">
+  <span>Sr.Security Consultant</span>
+  <span>ADP</span>
+  <span>July 2010 – Present</span>
+</div>
+      <div class="work_experience"><div>Day to day work involves reviewing of penetration tests performed and also performing pentests on web applications using tools such as IBM Appscan, BURP Suite, Qualys.</div>
+<div>Training  newly joined team members on technical and procedural concepts of testing.
+Regular review of the existing application vulnerabilities based on prevailing scenarios and suggest modification to the remediation.</div>
+    </div>
+	</div>
+  
+ 
+  
+   <div class="employment2">
+
+   <div class="designation">
+<span>IT Specialist</span>
+  <span>IBM India Pvt Ltd</span>
+  <span>2006-2010</span>
+</div>
+      <div class="work_experience">
+	  <div>
+Performing vulnerability assessment of entire location network and track it till closure.
+Being part of ISO 27001 team from IT department and got appreciation for successfully achieving certification.
+</div>
+<div>
+Generating security status reports and audit preparedness report for EC review.
+Security review of the infrastructure and following up with respective owner till the remediation of findings.
+Infrastructure SPOC for Bharti Airtel Andhra Pradesh.
+</div>
+</div>
+</div>
+   <div class="employment3">
+
+   <div class="designation">
+<span>IT Specialist</span>
+  <span>IBM India Pvt Ltd</span>
+  <span>2006-2010</span>
+</div>
+      <div class="work_experience">
+	  <div>
+Performing vulnerability assessment of entire location network and track it till closure.
+Being part of ISO 27001 team from IT department and got appreciation for successfully achieving certification.
+</div>
+<div>
+Generating security status reports and audit preparedness report for EC review.
+Security review of the infrastructure and following up with respective owner till the remediation of findings.
+Infrastructure SPOC for Bharti Airtel Andhra Pradesh.
+</div>
+</div>
+</div>
+  </div>
+  <div class="block2">
+  <div class="skills">
+  <h2>Skills</h2>
+<div class="vatools tools"><div style="background-color:#001D50;width:40px;height:15px;display:inline-block"></div><div style="background-color:#002D7C;width:40px;height:15px;display:inline-block"></div><div style="background-color:#0041B4;width:40px;height:15px;display:inline-block"></div><div style="background-color:#0055EB;width:40px;height:15px;display:inline-block"></div><div style="background-color:#4F8FFF;width:40px;height:15px;display:inline-block"></div><div class="title"><span>Security Tools</span></div><div class="sub-title"><div>-IBM APPScan, Burp Suite, Qualys</div></div></div><div class="OS tools"><div style="background-color:#74003D;width:40px;height:15px;display:inline-block"></div><div style="background-color:#A10055;width:40px;height:15px;display:inline-block"></div><div style="background-color:#D80072;width:40px;height:15px;display:inline-block"></div><div class="title"><span>OS</span></div><div class="sub-title"><div>-RHEL,Windows 2003, Windows 2008</div></div></div><div class="WebServers tools"><div style="background-color:#665900;width:40px;height:15px;display:inline-block"></div><div style="background-color:#867500;width:40px;height:15px;display:inline-block"></div><div style="background-color:#AA9400;width:40px;height:15px;display:inline-block"></div><div class="title"><span>Web Servers</span></div><div class="sub-title"><div>-IIS , Apache Tomcat</div></div></div><div class="PolicyCompliance  tools"><div style="background-color:#540062;width:40px;height:15px;display:inline-block"></div><div style="background-color:#7F0094;width:40px;height:15px;display:inline-block"></div><div style="background-color:#AC00C8;width:40px;height:15px;display:inline-block"></div><div style="background-color:#DB00FF;width:40px;height:15px;display:inline-block"></div><div class="title"><span>Policy Compliance </span></div><div class="sub-title"><div>-Symantec ESM Manager</div></div></div><div class="ComplianceStandards tools"><div style="background-color:#006560;width:40px;height:15px;display:inline-block"></div><div style="background-color:#008B84;width:40px;height:15px;display:inline-block"></div><div style="background-color:#00A79F;width:40px;height:15px;display:inline-block"></div><div style="background-color:#00DBCE;width:40px;height:15px;display:inline-block"></div><div style="background-color:#00FFF8;width:40px;height:15px;display:inline-block"></div><div class="title"><span>Compliance Standards</span></div><div class="sub-title"><div>-ISO 27001</div></div></div><div class="Scripting tools"><div style="background-color:#396200;width:40px;height:15px;display:inline-block"></div><div style="background-color:#497E00;width:40px;height:15px;display:inline-block"></div><div style="background-color:#63AB00;width:40px;height:15px;display:inline-block"></div><div class="title"><span>Scripting</span></div><div class="sub-title"><div>-PowerShell,Python</div></div></div></div>
+<div class="experience">
+<h2>Work-Experience</h2>
+<div id="chart-1" class="jqplot-target" style="position: relative;"><canvas width="304" height="350" class="jqplot-base-canvas" style="position: absolute; left: 0px; top: 0px;"></canvas><div class="jqplot-title" style="height: 0px; width: 0px;"></div><canvas width="304" height="350" class="jqplot-grid-canvas" style="position: absolute; left: 0px; top: 0px;"></canvas><canvas width="284" height="317" class="jqplot-series-shadowCanvas" style="position: absolute; left: 10px; top: 10px;"></canvas><canvas width="284" height="317" class="jqplot-series-canvas" style="position: absolute; left: 10px; top: 10px;"></canvas><canvas width="284" height="317" class="jqplot-pieRenderer-highlight-canvas" style="position: absolute; left: 10px; top: 10px;"></canvas><div class="jqplot-pie-series jqplot-data-label" style="position: absolute; left: 121px; top: 217px;">Application Security</div><div class="jqplot-pie-series jqplot-data-label" style="position: absolute; left: 50px; top: 156px;">Infra Security</div><div class="jqplot-pie-series jqplot-data-label" style="position: absolute; left: 122px; top: 91px;">System Admin</div><div class="jqplot-pie-series jqplot-data-label" style="position: absolute; left: 179px; top: 140px;">Code Analysis</div><canvas width="284" height="317" class="jqplot-event-canvas" style="position: absolute; left: 10px; top: 10px;"></canvas></div>
+</div>
+</div>
+<div class="main2">
+<div class="educationandcert">
+<div class="certification">
+<h2>Certifications</h2>
+
+<div class="cert1">
+<div class="name">Certified Ethical Hacker V7
+<table>
+<tbody><tr>
+<td>Date</td>
+<td>: March 28, 2012</td>
+</tr>
+<tr>
+<td>EC Council Membership</td>
+<td>: ECC960648</td>
+</tr>
+</tbody></table>
+</div>
+
+<div class="cert1_img"><img src="./resume_files/cert2.jpg"></div>
+</div>
+
+<div class="cert2">
+<div class="name">Red Hat Certified Engineer
+<table>
+<tbody><tr>
+<td>Date</td>
+<td>: January 01, 2009</td>
+</tr>
+<tr>
+<td>Certificate Number</td>
+<td>: 805009699636293</td>
+</tr>
+</tbody></table>
+
+</div>
+
+<div class="cert2_img"><img src="./resume_files/cert1.png"></div>
+</div>
+
+<div class="cert3">
+<div class="name">Completed course and examination of ISO/IEC 27001 Lead Auditor </div>
+<div class="cert3_img"><img src="./resume_files/cert3.gif"></div>
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<div class="education">
+<h2>Education</h2>
+<div class="degree1">
+<div class="qualification">
+<span>Bachelor of Technology</span>
+<span>2002-2006</span> 
+</div>
+<div class="place">
+<span>B V C Engg College</span>
+</div>
+</div>
+<div class="degree2">
+<div class="qualification">
+<span>Intermediate</span>
+<span>2000-2002</span> 
+</div>
+<div class="place">
+<span>Gowtham Junior College</span>
+</div>
+</div>
+<div class="degree3">
+<div class="qualification">
+<span>S.S.C.</span>
+<span>1999-2000</span> 
+</div>
+<div class="place">
+<span>St. Marys High School</span>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+<div class="footer"></div>
+
+
+
+</div></body></html>
