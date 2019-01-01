@@ -1,1 +1,540 @@
-<h1>Home Page</h1>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+
+$( document ).ready(function() {
+
+var clickedbox=0,clickedrow=0;
+
+/*Identify the clciked box*/
+$('body').on('click','.chess_board div div',function()
+{
+clickedbox=$(this).parent().children().index(this);
+clickedrow=$(this).parent().attr("class");
+clickedrow=parseInt(clickedrow.slice(clickedrow.length-1));
+var total=parseInt($('#number').val());
+var run=findboxes(clickedbox,clickedrow,total);
+});
+
+/*for answer*/
+
+$('body').on('click','#answer',function()
+{
+
+var xv,yv;
+
+var totalboxes=parseInt($('#number').val());
+for(q=0;q<totalboxes;q++)
+{
+ for(p=0;p<totalboxes;p++)
+ {
+   var array=findboxes(p,q,totalboxes);
+   var counter=countstar(array,totalboxes);
+   if(counter==totalboxes)
+   { xv=p;
+     yv=q;
+     drawboard(array,totalboxes);
+   }
+ }
+}
+
+if(xv!=undefined && yv!=undefined)
+{
+var draw=findboxes(xv,yv,totalboxes);
+}
+else
+{
+$('#submit').trigger('click');
+$('#answer').next().empty();
+$('#answer').after('<p>No solution</p>');
+
+}
+});
+function countstar(arra,totalb)
+{
+var c=0;
+for(m=0;m<totalb;m++)
+{
+ for(n=0;n<totalb;n++)
+ {
+   if(arra[n][m]=="*")
+   {
+    c++;
+   }
+ 
+ }
+ 
+ }
+ return c;
+}
+
+
+/*draw the empty board*/
+
+$('body').on('click','#submit',function(){
+$('.chess_board').empty();
+	var total=$('#number').val();
+	for(j=0;j<total;j++)
+{
+ var rowid='row'+j;
+  $('.chess_board').append("<div class="+rowid+"></div>");
+for(i=0;i<total;i++)
+{
+ $('.chess_board .'+rowid).append("<div class='empty'></div>");
+}
+}
+});
+
+/**get the boxes traversing through 'L' direction*/
+function findboxes(clickedbox,clickedrow,total)
+{
+
+var n=total;var list=[];var inc=0;
+
+var x=clickedbox,y=clickedrow;
+list.push([x,y]); /*defin a list which has all the traversed boxes*/
+
+/*Initialize the empty array*/
+var arr = [],
+    cols = n;
+for ( var i = 0; i < cols; i++ ) {
+    arr[i] = []; 
+}
+var a = [],
+    cols = n;
+for ( var i = 0; i < cols; i++ ) {
+    a[i] = []; 
+}
+
+/*Print empty array for knowing the indexes purpose*/
+
+for(j=0;j<n;j++)
+{
+for(i=0;i<n;i++)
+{
+a[i][j]=i+""+j;
+}
+}
+
+
+printarray(a);
+
+arr[x][y]="*";
+var count=1;
+
+for(k=1;k<n;k++)
+{
+	var checked=false;
+	if(count<n)
+	{
+		if(checked==false)
+		{
+		var return_value=[];
+		return_value=checkright(n,x,y,arr,checked);
+		arr=return_value[0];
+		checked=return_value[1];
+		if(checked==true)
+		{
+			count++;
+			x=return_value[2];
+			y=return_value[3];
+			list.push([x,y]);
+		}
+		}
+		if(checked==false)
+		{
+		var returns=[];
+		returns=checkleft(n,x,y,arr,checked);
+		arr=returns[0];
+		checked=returns[1];
+		if(checked==true)
+		{
+			count++;
+			x=returns[2];
+			y=returns[3];
+			list.push([x,y]);
+		}
+		}
+		if(checked==false)
+		{
+		var returns_top=[];
+		returns_top=checktop(n,x,y,arr,checked);
+		arr=returns_top[0];
+		checked=returns_top[1];
+		if(checked==true)
+		{
+			count++;
+			x=returns_top[2];
+			y=returns_top[3];
+			list.push([x,y]);
+		}
+		}
+		if(checked==false)
+		{
+		var returns_btm=[];
+		returns_btm=checkbottom(n,x,y,arr,checked);
+		arr=returns_btm[0];
+		checked=returns_btm[1];
+		if(checked==true)
+		{
+			count++;
+			x=returns_btm[2];
+			y=returns_btm[3];
+			list.push([x,y]);
+		}
+		}
+		if(count<k && checked==false && inc>=0)/*Traverse through all the aachieved points starting from first again*/
+		{
+		if(list[inc]!=undefined)
+		{
+			if(count<n)
+            {
+				x=list[inc][0];
+				y=list[inc][1];
+				inc++;
+				if(k==n-1)
+                {
+					k=k-1;
+                }
+				
+            }
+		}
+			
+		}
+		else if(checked==false && count>1)
+        {
+		console.log("no posiible moves");
+		}
+	}	
+}
+printarray(arr,n);
+
+/*check the left empty column*/
+var totalvalue=n;
+for(xvalue=0;xvalue<totalvalue;xvalue++)
+{
+var yvalue=null;
+ if(arr[xvalue].indexOf("*")==-1)
+ {
+	yvalue=checkempty(totalvalue,xvalue,arr);
+     if(yvalue!=null)
+	 {
+	  arr[xvalue][yvalue]="*";
+	 }
+ }
+ 
+}
+
+drawboard(arr,n);
+return arr;
+}
+
+function printarray(arr,n)
+{
+for(j=0;j<n;j++)
+{
+var str="";
+for(i=0;i<n;i++)
+{
+str=str+arr[i][j]+"|";
+}
+console.log(str);
+console.log("\n");
+}
+
+
+}
+
+function checkright(n,x,y,arr,checked)
+{
+	var i,j;
+if(x-2>=0)
+{
+if(y-1>=0 && checked==false )
+{
+if(arr[x-2][y-1]==undefined)
+{
+	if(!(checkx(n,arr,x-2)||checky(n,arr,y-1)||checkcrossx(n,arr,x-2,y-1)))
+	{
+		arr[x-2][y-1]="*";
+		i=x-2;
+		j=y-1;
+		checked=true;
+	}
+}
+}
+
+if(y+1<n && checked==false)
+{
+if(arr[x-2][y+1]==undefined)
+{
+	if(!(checkx(n,arr,x-2)||checky(n,arr,y+1)||checkcrossx(n,arr,x-2,y+1)))
+	{
+		arr[x-2][y+1]="*";
+		i=x-2;
+		j=y+1;
+		checked=true;
+	}
+}
+
+}
+}
+return [arr,checked,i,j];
+}
+
+
+function checkleft(n,x,y,arr,checked)
+{
+	var i,j;
+if(x+2<n)
+{
+if(y-1>=0 && checked==false)
+{
+	if(arr[x+2][y-1]==undefined)
+	{
+	
+	if(!(checkx(n,arr,x+2)||checky(n,arr,y-1)||checkcrossx(n,arr,x+2,y-1)))
+	{
+		arr[x+2][y-1]="*";
+		checked=true;
+		i=x+2;
+		j=y-1;
+	}
+	}
+}
+
+if(y+1<n && checked==false)
+{
+if(arr[x+2][y+1]==undefined)
+{
+	if(!(checkx(n,arr,x+2)||checky(n,arr,y+1)||checkcrossx(n,arr,x+2,y+1)))
+	{
+		arr[x+2][y+1]="*";
+		checked=true;
+		i=x+2;
+		j=y+1;
+	}
+}
+}
+
+}
+return [arr,checked,i,j];
+}
+
+
+
+function checktop(n,x,y,arr,checked)
+{
+	var i,j;
+if(y-2>=0)
+{
+if(x-1>=0 && checked==false)
+{
+if(arr[x-1][y-2]==undefined)
+{
+	if(!(checkx(n,arr,x-1)||checky(n,arr,y-2)||checkcrossx(n,arr,x-1,y-2)))
+	{
+		arr[x-1][y-2]="*";
+		i=x-1;
+		j=y-2;
+		checked=true;
+	}
+}
+}
+
+if(x+1<n && checked==false)
+{
+if(arr[x+1][y-2]==undefined)
+{
+	if(!(checkx(n,arr,x+1)||checky(n,arr,y-2)||checkcrossx(n,arr,x+1,y-2)))
+	{
+		arr[x+1][y-2]="*";
+		i=x+1;
+		j=y-2;
+		checked=true;
+	}
+}
+
+}
+}
+return [arr,checked,i,j];
+}
+
+function checkbottom(n,x,y,arr,checked)
+{
+	var i,j;
+if(y+2<n)
+{
+if(x-1>=0 && checked==false)
+{
+if(arr[x-1][y+2]==undefined)
+{
+	if(!(checkx(n,arr,x-1)||checky(n,arr,y+2)||checkcrossx(n,arr,x-1,y+2)))
+	{
+		arr[x-1][y+2]="*";
+		i=x-1;
+		j=y+2;
+		checked=true;
+	}
+}
+}
+
+if(x+1<n && checked==false)
+{
+if(arr[x+1][y+2]==undefined)
+{
+	if(!(checkx(n,arr,x+1)||checky(n,arr,y+2)||checkcrossx(n,arr,x+1,y+2)))
+	{
+		arr[x+1][y+2]="*";
+		i=x+1;
+		j=y+2;
+		checked=true;
+	}
+}
+
+}
+}
+return [arr,checked,i,j];
+}
+
+
+function checkx(n,arr,x)
+{
+	var status=false;
+	for(j=0;j<n;j++)
+	{
+      if(arr[x][j]=="*")
+	  {
+		status=true;  
+	  }
+	
+	}
+	return status;
+	
+}
+
+function checky(n,arr,y)
+{
+	var status=false;
+	for(i=0;i<n;i++)
+	{
+      if(arr[i][y]=="*")
+	  {
+		status=true;  
+	  }
+	
+	}
+	return status;
+	
+}
+
+
+function checkcrossx(n,arr,x,y){
+
+ var status=false;var res=0;
+ for(j=0;j<n;j++)
+ {
+   for(i=0;i<n;i++)
+   {
+    if(i!=x && j!=y)
+	{
+res=(i-x)/(j-y);
+		if(res == 1 || res== -1)
+		{
+		if(arr[i][j]=="*")
+			{
+			 status=true;
+			}
+		}
+	}
+   
+   }
+   
+ }
+
+ return status;
+
+}
+
+function checkempty(n,ivalue,arr)
+{
+  for(k=0;k<n;k++)
+  {
+    if(!(checkx(n,arr,ivalue)||checky(n,arr,k)||checkcrossx(n,arr,ivalue,k)))
+	{
+		return k;
+	}
+  
+  }
+}
+
+
+
+function drawboard(arr,n)
+{
+$('.chess_board').empty();
+for(j=0;j<n;j++)
+{
+ var rowid='row'+j;
+  $('.chess_board').append("<div class="+rowid+"></div>");
+for(i=0;i<n;i++)
+{
+ if(arr[i][j]=="*")
+ {
+	$('.chess_board .'+rowid).append("<div class='filled'></div>");
+ }
+ else
+ {
+ $('.chess_board .'+rowid).append("<div class='empty'></div>");
+ }
+}
+}
+}
+
+});
+
+
+
+
+</script>
+<style type="text/css">
+.filled{
+width:30px;
+height:30px;
+background-color:red;
+color:red;
+padding-right:10px;
+border:2px solid white;
+display:inline-block;
+}
+.empty{
+width:30px;
+height:30px;
+background-color:green;
+color:green;
+padding-right:10px;
+border:2px solid white;
+display:inline-block;
+}
+
+</style>
+</head>
+<body>
+Number:<br>
+<input type="text" name="number" id="number">
+
+<button type="button" id="submit">Click Me!</button>
+
+<div class="chess_board">
+
+
+</div>
+<button type="button" id="answer">Answer</button>
+</body>
+
+
+
+
+
+</html>
